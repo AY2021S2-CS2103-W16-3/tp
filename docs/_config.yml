@@ -8,7 +8,7 @@ header_pages:
 
 markdown: kramdown
 
-repository: "AY2021S2-CS2103-W16-3/tp"
+repository: "se-edu/addressbook-level3"
 github_icon: "images/github-icon.png"
 
 plugins:
