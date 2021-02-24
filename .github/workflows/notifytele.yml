@@ -15,8 +15,8 @@
 name: Telegram PR notification
 on:
   pull_request_target:
-    branches: [ master ]  # only PR to master branch invokes workflow
-    types: [ opened ]     # 'synchronize' -> update, 'edited' -> modified
+    branches: [ master ]   # only PR to master branch invokes workflow
+    types: [ opened ]      # 'synchronize' -> update, 'edited' -> modified
 
 jobs:
   notify:
