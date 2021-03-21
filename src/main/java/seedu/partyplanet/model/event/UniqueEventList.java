@@ -6,6 +6,7 @@ import static seedu.partyplanet.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -130,13 +131,7 @@ public class UniqueEventList implements Iterable<Event> {
      * Returns true if {@code events} contains only unique events.
      */
     private boolean eventsAreUnique(List<Event> events) {
-        for (int i = 0; i < events.size() - 1; i++) {
-            for (int j = i + 1; j < events.size(); j++) {
-                if (events.get(i).isSameEvent(events.get(j))) {
-                    return false;
-                }
-            }
-        }
-        return true;
+        Set<Event> set = new HashSet<>(events);
+        return set.size() == events.size();
     }
 }
