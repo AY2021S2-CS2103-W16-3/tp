@@ -1,0 +1,40 @@
+@startuml AutocompleteSequenceDiagram
+!include style.puml
+
+box UI UI_COLOR_T1
+participant ":UI" as UI UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":EditAutocompleteUtil" as EditAutocompleteUtil LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> UI : "edit 1 -r TAB"
+activate UI
+
+UI-> LogicManager : autoComplete("edit 1 -r")
+activate LogicManager
+
+LogicManager -> EditAutocompleteUtil : parseEditCommand("edit 1 -r")
+activate EditAutocompleteUtil
+
+EditAutocompleteUtil -> Model
+activate Model
+
+Model -> EditAutocompleteUtil : result
+deactivate Model
+
+EditAutocompleteUtil -> LogicManager : result
+deactivate EditAutocompleteUtil
+
+LogicManager -> UI : result
+deactivate LogicManager
+
+UI ->[ : result
+deactivate UI
+@enduml
