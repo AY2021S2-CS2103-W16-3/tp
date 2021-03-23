@@ -1,0 +1,81 @@
+@startuml
+!include style.puml
+
+box UI 
+participant ":UI" as UI UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":EDoneCommandParser" as EDoneCommandParser LOGIC_COLOR
+participant ":EDoneCommand" as EDoneCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> UI : "edone 1 2 3"
+activate UI
+
+UI -> LogicManager : execute("edone 1 2 3")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("edone 1 2 3")
+activate AddressBookParser
+
+create EDoneCommandParser
+AddressBookParser -> EDoneCommandParser
+activate EDoneCommandParser
+
+EDoneCommandParser --> AddressBookParser
+deactivate EDoneCommandParser
+
+AddressBookParser -> EDoneCommandParser : parse("1 2 3")
+activate EDoneCommandParser
+
+create EDoneCommand
+EDoneCommandParser -> EDoneCommand : EDoneCommand([1, 2, 3])
+activate EDoneCommand
+
+EDoneCommand --> EDoneCommandParser
+deactivate EDoneCommand
+
+EDoneCommandParser --> AddressBookParser
+deactivate EDoneCommandParser
+
+AddressBookParser --> LogicManager
+deactivate AddressBookParser
+
+LogicManager -> EDoneCommand : execute(model)
+activate EDoneCommand
+
+EDoneCommand -> Model : getFilteredEventList()
+activate Model
+Model --> EDoneCommand : List<Event>
+deactivate Model
+
+loop for each index
+EDoneCommand -> Model : setEvent(event, event.done())
+activate Model
+Model --> EDoneCommand
+deactivate Model
+end
+
+create CommandResult
+EDoneCommand -> CommandResult
+activate CommandResult
+CommandResult --> EDoneCommand
+deactivate CommandResult
+
+EDoneCommand --> LogicManager
+deactivate EDoneCommand
+
+LogicManager --> UI
+deactivate LogicManager
+
+[<-- UI
+deactivate UI
+@enduml
