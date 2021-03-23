@@ -37,7 +37,7 @@ AddressBookParser -> EDoneCommandParser : parse("1 2 3")
 activate EDoneCommandParser
 
 create EDoneCommand
-EDoneCommandParser -> EDoneCommand : EDoneCommand([1, 2, 3])
+EDoneCommandParser -> EDoneCommand : EDoneCommand(List<Index>)
 activate EDoneCommand
 
 EDoneCommand --> EDoneCommandParser
@@ -52,11 +52,6 @@ deactivate AddressBookParser
 LogicManager -> EDoneCommand : execute(model)
 activate EDoneCommand
 
-EDoneCommand -> Model : getFilteredEventList()
-activate Model
-Model --> EDoneCommand : List<Event>
-deactivate Model
-
 loop for each index
 EDoneCommand -> Model : setEvent(event, event.done())
 activate Model
@@ -67,6 +62,7 @@ end
 create CommandResult
 EDoneCommand -> CommandResult
 activate CommandResult
+
 CommandResult --> EDoneCommand
 deactivate CommandResult
 

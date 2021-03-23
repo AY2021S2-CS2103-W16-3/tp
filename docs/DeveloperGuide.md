@@ -310,7 +310,7 @@ James -r Loves sweets")` API call.
 
 ### [Feature] Marking `Event` as Done
 
-We want to allow `Event` to be marked as done. So that the user can easily keep tracked of what events have been completed,
+We want to allow `Event` to be marked as done. So that the user can easily keep track of what events have been completed,
 and what events are upcoming.
 
 `Event` titles could include a tick to represent completion.
@@ -324,11 +324,11 @@ and what events are upcoming.
 
 Given below is an example usage scenario and how `edone` will work.
 
-1. The user executes `edone 1 2 3` command to mark event with index 1, 2 and 3 as done.
+1. The user executes `edone 1 2 3` command to mark event at index 1, 2 and 3 as done.
 
 2. `LogicManager` calls `parseCommand("edone 1 2 3")` of `AddressBookParser` to parse the input.
 
-3. `AddressBookParser` detects command work `edone` and creates an `EDoneCommandParser`.
+3. `AddressBookParser` detects command word `edone` and creates an `EDoneCommandParser`.
 
 4. `AddressBookParser` calls `parse("1 2 3")` of `EDoneCommandParser`.
 
