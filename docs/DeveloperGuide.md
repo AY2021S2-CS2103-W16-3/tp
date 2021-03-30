@@ -17,17 +17,17 @@ Refer to the guide [_Setting up and getting started_](developer/SettingUp.md).
 
 ### Architecture
 
-{% include_relative developerGuide/architecture.md %}
+{% include_relative developerGuide/architecture/index.md %}
 
 The sections below give more details of each component.
 
-{% include_relative developerGuide/architectureUi.md %}
+{% include_relative developerGuide/architecture/Ui.md %}
 
-{% include_relative developerGuide/architectureLogic.md %}
+{% include_relative developerGuide/architecture/Logic.md %}
 
-{% include_relative developerGuide/architectureModel.md %}
+{% include_relative developerGuide/architecture/Model.md %}
 
-{% include_relative developerGuide/architectureStorage.md %}
+{% include_relative developerGuide/architecture/Storage.md %}
 
 
 ### Common classes
@@ -40,21 +40,21 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-{% include_relative developerGuide/featureHelp.md %}
+{% include_relative developerGuide/feature/Help.md %}
 
-{% include_relative developerGuide/featureUndoRedo.md %}
+{% include_relative developerGuide/feature/UndoRedo.md %}
 
-{% include_relative developerGuide/featureAdd.md %}
+{% include_relative developerGuide/feature/Add.md %}
 
-{% include_relative developerGuide/featureEdit.md %}
+{% include_relative developerGuide/feature/Edit.md %}
 
-{% include_relative developerGuide/featureEventDone.md %}
+{% include_relative developerGuide/feature/EventDone.md %}
 
-{% include_relative developerGuide/featureAutocomplete.md %}
+{% include_relative developerGuide/feature/Autocomplete.md %}
 
-{% include_relative developerGuide/featureDataArchiving.md %}
+{% include_relative developerGuide/feature/DataArchiving.md %}
 
-{% include_relative developerGuide/featureSortByDate.md %}
+{% include_relative developerGuide/feature/SortByDate.md %}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -70,13 +70,13 @@ This section describes some noteworthy details on how certain features are imple
 
 ## **Appendix: Requirements**
 
-{% include_relative developerGuide/requirementsProductScope.md %}
+{% include_relative developerGuide/requirements/ProductScope.md %}
 
-{% include_relative developerGuide/requirementsUserStories.md %}
+{% include_relative developerGuide/requirements/UserStories.md %}
 
-{% include_relative developerGuide/requirementsUseCases.md %}
+{% include_relative developerGuide/requirements/UseCases.md %}
 
-{% include_relative developerGuide/requirementsNonFunctional.md %}
+{% include_relative developerGuide/requirements/NonFunctional.md %}
 
 ### Glossary
 
@@ -94,4 +94,4 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-{% include_relative developerGuide/testingManual.md %}
+{% include_relative developerGuide/testing/index.md %}
