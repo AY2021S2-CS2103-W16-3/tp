@@ -87,7 +87,7 @@ public class StateHistory {
     }
 
     private void clearStatesAfterCurrent() {
-        logger.info("called clear");
+        logger.info("Clearing subsequent states");
         states.subList(currentStatePointer + 1, states.size()).clear();
     }
 }

@@ -2,12 +2,8 @@ package seedu.partyplanet.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.partyplanet.commons.util.State;
-import seedu.partyplanet.commons.util.StateHistory;
 import seedu.partyplanet.logic.commands.exceptions.CommandException;
 import seedu.partyplanet.model.Model;
-import seedu.partyplanet.model.ReadOnlyAddressBook;
-import seedu.partyplanet.model.ReadOnlyEventBook;
 
 /**
  * Redoes the previous command that changes the AddressBook
@@ -35,18 +31,9 @@ public class RedoCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        StateHistory states = model.getStateHistory();
-        State nextState;
-        ReadOnlyAddressBook addressBook;
-        ReadOnlyEventBook eventBook;
         String command;
         try {
-            nextState = states.nextState();
-            addressBook = nextState.getAddressBook();
-            eventBook = nextState.getEventBook();
-            command = nextState.getCommand();
-            model.setAddressBook(addressBook);
-            model.setEventBook(eventBook);
+            command = model.redo();
         } catch (IndexOutOfBoundsException e) {
             throw new CommandException(MESSAGE_INVALID_REDO);
         }

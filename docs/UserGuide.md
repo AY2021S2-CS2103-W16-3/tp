@@ -62,14 +62,6 @@ Examples:
 * `add -n James Ho -p 22224444 -e jamesho@example.com -a 123, Clementi Rd, 1234665 -t friend -t colleague -b 1 Jan
   -r allergic to nuts` Adds a new person James Ho with specified details.
 
-### Clearing all contacts : `clear`
-
-Deprecated: essentially same function as `delete`
-
-Removes all contacts from the PartyPlanet's Contact List.
-
-Format: `clear`
-
 ### Deleting contacts : `delete`
 
 Deletes person(s) from PartyPlanet's Contact List.
@@ -109,22 +101,6 @@ Examples:
 *  `edit 2 -n Betsy Crower -t` Edits the name of the 2nd person to be Betsy Crower and clears all existing tags.
 * `edit --remove -t friends` Removes the `friends` tag from Alex Yeoh and Charlotte Oliveiro.
 
-### Finding contacts : `find`
-
-Deprecated: essentially same function as `list`
-
-Finds persons whose names contain the given keywords and/or is associated with the given tag.
-
-Format: `find [-n NAME] [-t TAG]`
-
-* The search is case-insensitive. e.g. `hans` will match `Hans`.
-* Partial matches to names are returned, e.g. `lliam` will match `williams`.
-* Only full tags will be matched.
-
-
-Examples:
-* `find -n Bob -t cs2103` Finds contacts where the name contains Bob and the contact contains the tag cs2103.
-
 ### Listing contacts : `list`
 
 Shows a list of all persons in PartyPlanet's Contact List.
@@ -151,16 +127,6 @@ Examples:
 * `list --any -n alice -t friend` Lists out all contacts whose name is "Alice" or who have the "friend" tag
 * `list --exact -n alice -t friend` Lists out all contacts whose name contain "Alice" and who have tags that contain "friend"
 * `list --exact --any -n alice -t friend` Lists out all contacts whose name contain "Alice" or who have tags that contain "friend"
-
-### Finding tags : `tags`
-
-Finds all tags or tags that contain the given keywords.
-
-Format: `tags [-f KEYWORD]`
-
-Examples:
-* `tags` lists out all tags available.
-* `tags -f cs2103` lists out all tags that contain `cs2103`.
 
 ## Event List Commands
 
@@ -264,12 +230,16 @@ Can be invoked repeatedly until there is no more history from the current sessio
 
 Format: `undo`
 
+Shortcut: `CTRL + Z`
+
 ### Redoing actions : `redo`
 
 Redoes the previous action that changed PartyPlanet's Contact or Event List.
 Can be invoked repeatedly until there are no more previously executed actions from the current session.
 
-Format: `undo`
+Format: `redo`
+
+Shortcut: `CTRL + SHIFT + Z` or `CTRL + Y`
 
 ### Toggle theme : `theme`
 
@@ -293,6 +263,8 @@ Retrieves previously entered input.
 * Pressing `Down` arrow key undoes the history revert.
 * At the most recent input, pressing `Down` arrow key once more clears the text box.
 * `ESC` key clears the text box.
+* `CTRL + Z` key combination undoes the last change to the address or event books.
+* `CTRL + SHIFT + Z` or `CTRL + Y` key combinations redo the last undone change to the address or event books.
 
 ### Coming Soon (Additional Features)
 * Add/Edit/Delete Modules and Tasks/Deliverables
@@ -320,16 +292,13 @@ Action | Format, Examples
 --------|------------------
 **Add** | `add -n NAME [-p PHONE_NUM] [-e EMAIL] [-a ADDRESS] [-t TAG]…​ [-b BIRTHDAY] [-r REMARK]` <br> e.g., `add -n James Ho -p 96280000 -t friend -t colleague -r allergic to nuts`
 **EAdd** | `eadd -n NAME [-d DATE] [-r REMARK]` <br> e.g. `eadd -n April Fools -d 2021-04-01 -r Prank the april babies!`
-**Clear** | `clear`
 **Delete** | `delete [{INDEX [INDEX]…​ | [--any] -t TAG [-t TAG]...}]`<br> e.g. `delete` <br> e.g. `delete 3 4 5` <br> e.g., `delete -t colleague`
 **EDelete** | `edelete [INDEX [INDEX]...]` <br> e.g. `edelete 1 2 3`
 **EDone** | `edone INDEX [INDEX]…​` <br> e.g. `edone 2 3 5`
 **Edit** | `edit {INDEX [-n NAME] [-p PHONE_NUMBER] [-e EMAIL] [-a ADDRESS] [-t TAG]…​ [-b BIRTHDAY] [-r REMARK] | --remove -t TAG [-t TAG}…​}`<br> e.g.,`edit 2 -n James Lee -e jameslee@example.com`<br> e.g., `edit --remove -t colleague`
 **EEdit** | `eedit INDEX [-n NAME] [-d DATE] [-r REMARK]` <br> e.g. `eedit 3 -r Celebrate during first combined practice`
-**Find** | `find [-n NAME] [-t TAG]`<br> e.g., `find -n Bob -t cs2103`
 **List** | `list [-s SORT_ORDER]`<br> e.g., `list`<br> e.g., `list -s asc`
 **EList** | `elist [--exact] [--any] [-n NAME] [-r DETAIL] ... [-s SORT] [-o ORDER]` <br> e.g. `elist --any -n Christmas -r tarts`
-**Find tags** | `tags [-f KEYWORD]`<br> e.g.,`tags`<br> e.g., `tags -f cs2103`
 **Undo** | `undo`
 **Redo** | `redo`
 **Help** | `help [COMMAND]`<br> e.g., `help`<br> e.g.,`help list`

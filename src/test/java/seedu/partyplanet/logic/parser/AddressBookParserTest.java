@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.partyplanet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.partyplanet.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.partyplanet.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.partyplanet.testutil.Assert.assertThrows;
 import static seedu.partyplanet.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -13,19 +12,16 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.partyplanet.logic.commands.AddCommand;
-import seedu.partyplanet.logic.commands.ClearCommand;
 import seedu.partyplanet.logic.commands.DeleteCommand;
 import seedu.partyplanet.logic.commands.DeleteContactCommand;
 import seedu.partyplanet.logic.commands.EditCommand;
 import seedu.partyplanet.logic.commands.EditFieldCommand;
 import seedu.partyplanet.logic.commands.EditFieldCommand.EditPersonDescriptor;
 import seedu.partyplanet.logic.commands.ExitCommand;
-import seedu.partyplanet.logic.commands.FindCommand;
 import seedu.partyplanet.logic.commands.HelpCommand;
 import seedu.partyplanet.logic.commands.ListCommand;
 import seedu.partyplanet.logic.parser.exceptions.ParseException;
 import seedu.partyplanet.model.person.Person;
-import seedu.partyplanet.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.partyplanet.testutil.EditPersonDescriptorBuilder;
 import seedu.partyplanet.testutil.PersonBuilder;
 import seedu.partyplanet.testutil.PersonUtil;
@@ -39,12 +35,6 @@ public class AddressBookParserTest {
         Person person = new PersonBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
         assertEquals(new AddCommand(person), command);
-    }
-
-    @Test
-    public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
     }
 
     @Test
@@ -67,14 +57,6 @@ public class AddressBookParserTest {
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
-    }
-
-    @Test
-    public void parseCommand_find() throws Exception {
-        String keywords = "foo";
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + PREFIX_NAME + " " + keywords);
-        assertEquals(new FindCommand(List.of(new NameContainsKeywordsPredicate(keywords))), command);
     }
 
     @Test

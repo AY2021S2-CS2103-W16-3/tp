@@ -9,12 +9,14 @@ end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-participant ":VersionedAddressBook" as VersionedAddressBook MODEL_COLOR
+participant ":StateHistory" as StateHistory MODEL_COLOR
+participant ":AddressBook" as AddressBook MODEL_COLOR
+participant ":EventBook" as EventBook MODEL_COLOR
 end box
-[-> LogicManager : execute(undo)
+[-> LogicManager : execute("undo")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(undo)
+LogicManager -> AddressBookParser : parseCommand("undo")
 activate AddressBookParser
 
 create UndoCommand
@@ -30,21 +32,40 @@ deactivate AddressBookParser
 LogicManager -> UndoCommand : execute()
 activate UndoCommand
 
-UndoCommand -> Model : undoAddressBook()
+UndoCommand -> Model : undo()
 activate Model
 
-Model -> VersionedAddressBook : undo()
-activate VersionedAddressBook
+Model -> StateHistory : previousState()
+activate StateHistory
 
-VersionedAddressBook -> VersionedAddressBook :resetData(ReadOnlyAddressBook)
-VersionedAddressBook --> Model :
-deactivate VersionedAddressBook
+StateHistory --> Model : previousState
+deactivate StateHistory
+
+Model -> AddressBook : setAddressBook(ReadOnlyAddressBook)
+activate AddressBook
+
+AddressBook -> AddressBook : resetData(ReadOnlyAddressBook)
+
+AddressBook --> Model
+deactivate AddressBook
+
+Model -> EventBook : setEventBook((ReadOnlyEventBook)
+activate EventBook
+
+EventBook -> EventBook : resetData(ReadOnlyEventBook)
+
+EventBook --> Model
+deactivate EventBook
+
+
+
 
 Model --> UndoCommand
 deactivate Model
 
 UndoCommand --> LogicManager : result
 deactivate UndoCommand
+
 UndoCommand -[hidden]-> LogicManager : result
 destroy UndoCommand
 

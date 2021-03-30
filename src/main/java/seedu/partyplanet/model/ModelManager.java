@@ -141,9 +141,34 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public StateHistory getStateHistory() {
-        return this.stateHistory;
+    public String undo() throws IndexOutOfBoundsException {
+        State previousState;
+        String command = stateHistory.currentState().getCommand();
+        try {
+            previousState = stateHistory.previousState();
+            setAddressBook(previousState.getAddressBook());
+            setEventBook(previousState.getEventBook());
+            return command;
+        } catch (IndexOutOfBoundsException e) {
+            throw e;
+        }
     }
+
+    @Override
+    public String redo() throws IndexOutOfBoundsException {
+        State nextState;
+        String command;
+        try {
+            nextState = stateHistory.nextState();
+            command = nextState.getCommand();
+            setAddressBook(nextState.getAddressBook());
+            setEventBook(nextState.getEventBook());
+            return command;
+        } catch (IndexOutOfBoundsException e) {
+            throw e;
+        }
+    }
+
 
 
     //=========== Filtered Person List Accessors =============================================================

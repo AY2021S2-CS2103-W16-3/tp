@@ -146,14 +146,20 @@ public class AddCommandTest {
         }
 
         @Override
-        public StateHistory getStateHistory() {
+        public void addState(String command) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void addState(String command) {
+        public String undo() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public String redo() {
+            throw new AssertionError("This method should not be called.");
+        }
+
 
         @Override
         public ObservableList<Person> getFilteredPersonList() {

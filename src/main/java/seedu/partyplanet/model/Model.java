@@ -7,7 +7,6 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.partyplanet.commons.core.GuiSettings;
-import seedu.partyplanet.commons.util.StateHistory;
 import seedu.partyplanet.model.event.Event;
 import seedu.partyplanet.model.person.Person;
 
@@ -167,6 +166,15 @@ public interface Model {
      */
     void addState(String command);
 
-    /** Returns the StateHistory */
-    StateHistory getStateHistory();
+    /**
+     * Undoes the last change made to the address or event book.
+     * @return information about the command being undone.
+     */
+    String undo();
+
+    /**
+     * Redoes the last undid change made to the address or event book.
+     * @return information about the command being redone.
+     */
+    String redo();
 }
